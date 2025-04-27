@@ -1,0 +1,102 @@
+# Show splash screen only once on startup
+if (-not $global:SplashShown) {
+    $global:SplashShown = $true
+    Clear-Host
+
+    # Define matrix-like characters for splash
+    $matrixChars = @("ア", "イ", "ウ", "エ", "オ", "カ", "キ", "ク", "ケ", "コ", "サ", "シ", "ス", "セ", "ソ", "タ", "チ", "ツ", "テ", "ト", "ナ", "ニ", "ヌ", "ネ", "ノ")
+    $width = 60
+    $lines = 10
+
+    # Generate and display the splash screen
+    for ($i = 0; $i -lt $lines; $i++) {
+        $line = ""
+        for ($j = 0; $j -lt $width; $j++) {
+            $line += $matrixChars | Get-Random
+        }
+        Write-Host $line -ForegroundColor Green
+        Start-Sleep -Milliseconds 100
+    }
+
+    Start-Sleep -Milliseconds 100
+    Clear-Host
+
+    # Random welcome message after Matrix splash
+    $welcomeMessages = @(
+        "Wake up, JayJay...",
+        "System ready.",
+        "Stay focused.",
+        "The Matrix has you.",
+        "Begin transmission.",
+        "Ready to code.",
+        "Dreams demand hustle.",
+        "Every line matters.",
+        "Welcome back, legend."
+    )
+
+    # Pick a random message
+    $message = $welcomeMessages | Get-Random
+
+    # Typing effect with random typing speed
+    foreach ($char in $message.ToCharArray()) {
+        Write-Host -NoNewline $char -ForegroundColor Green
+        Start-Sleep -Milliseconds (Get-Random -Minimum 30 -Maximum 80)
+    }
+
+    Start-Sleep -Milliseconds 1000
+    Clear-Host
+}
+
+# Define the prompt function (your green prompt)
+function prompt {
+    Write-Host "J >" -ForegroundColor Green -NoNewline
+    return " "
+}
+
+# Useful aliases
+Set-Alias clr Clear-Host
+
+function cdc {
+    Set-Location "C:\"
+}
+
+function cdg {
+    Set-Location "D:\GitHub"
+}
+
+# Set starting directory
+Set-Location "D:\GitHub\"
+
+
+# Secret Easter Egg: Triggered by typing 'reboot'
+function reboot {
+    Clear-Host
+    Write-Host "ACCESS GRANTED: Initiating Hacker Protocol..." -ForegroundColor Green
+    Start-Sleep -Seconds 1
+
+    # Fake reboot-like countdown
+    5..1 | ForEach-Object {
+        Write-Host "$_..." -ForegroundColor Cyan
+        Start-Sleep -Seconds 1
+    }
+
+    # Initiate secret console text
+    Write-Host "Reboot sequence complete." -ForegroundColor Green
+    Start-Sleep -Milliseconds 500
+    Write-Host "Hacker Mode Active. System running at optimal performance..." -ForegroundColor Yellow
+    Start-Sleep -Milliseconds 500
+
+    # Final hacker message
+    $hackerMessages = @(
+        "Welcome back, operator.",
+        "System compromised. Protocols engaged.",
+        "You're in. Proceed with caution.",
+        "Hacker ID confirmed: JayJay.",
+        "Exploiting the system for fun and profit..."
+    )
+
+    # Random hacker message from list
+    Write-Host ($hackerMessages | Get-Random) -ForegroundColor Magenta
+    Start-Sleep -Seconds 2
+    Clear-Host
+}
