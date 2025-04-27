@@ -1,14 +1,16 @@
+# =============== Splash Screen Section ===============
+
 # Show splash screen only once on startup
 if (-not $global:SplashShown) {
     $global:SplashShown = $true
     Clear-Host
 
-    # Define matrix-like characters for splash
+    # Matrix characters for splash
     $matrixChars = @("ア", "イ", "ウ", "エ", "オ", "カ", "キ", "ク", "ケ", "コ", "サ", "シ", "ス", "セ", "ソ", "タ", "チ", "ツ", "テ", "ト", "ナ", "ニ", "ヌ", "ネ", "ノ")
     $width = 60
     $lines = 10
 
-    # Generate and display the splash screen
+    # Generate matrix-like splash screen
     for ($i = 0; $i -lt $lines; $i++) {
         $line = ""
         for ($j = 0; $j -lt $width; $j++) {
@@ -21,7 +23,7 @@ if (-not $global:SplashShown) {
     Start-Sleep -Milliseconds 100
     Clear-Host
 
-    # Random welcome message after Matrix splash
+    # Random welcome message after splash
     $welcomeMessages = @(
         "Wake up, JayJay...",
         "System ready.",
@@ -29,15 +31,13 @@ if (-not $global:SplashShown) {
         "The Matrix has you.",
         "Begin transmission.",
         "Ready to code.",
-        "Dreams demand hustle.",
-        "Every line matters.",
-        "Welcome back, legend."
+        "Welcome back, legend.",
+        "Hey, JayJay.",
+        "Can you talk?"
     )
 
-    # Pick a random message
+    # Pick random message and apply typing effect
     $message = $welcomeMessages | Get-Random
-
-    # Typing effect with random typing speed
     foreach ($char in $message.ToCharArray()) {
         Write-Host -NoNewline $char -ForegroundColor Green
         Start-Sleep -Milliseconds (Get-Random -Minimum 30 -Maximum 80)
@@ -47,28 +47,47 @@ if (-not $global:SplashShown) {
     Clear-Host
 }
 
-# Define the prompt function (your green prompt)
+# =============== Prompt Section ===============
+
+# Green prompt for terminal
 function prompt {
     Write-Host "J >" -ForegroundColor Green -NoNewline
     return " "
 }
 
-# Useful aliases
+# =============== Aliases Section ===============
+
+# Quick clear screen alias
 Set-Alias clr Clear-Host
 
-function cdc {
-    Set-Location "C:\"
+# Navigation aliases
+function cdc { Set-Location "C:\" }
+function cdg { Set-Location "D:\github" }
+
+# Default starting directory
+Set-Location "D:\github\"
+
+# =============== Function Section ===============
+
+# Open the note-taking script
+function takenote {
+    python "D:\github\notes\aNoteTaker.py"
 }
 
-function cdg {
-    Set-Location "D:\GitHub"
+# Open the note-viewing script
+function viewnote {
+    python "D:\github\notes\aNoteViewer.py"
 }
 
-# Set starting directory
-Set-Location "D:\GitHub\"
+# Open the repo page in browser
+function go-repo {
+    $repoUrl = "https://github.com/CodeSeedJJ?tab=repositories"
+    Start-Process $repoUrl
+}
 
+# =============== Easter Egg Section ===============
 
-# Secret Easter Egg: Triggered by typing 'reboot'
+# Secret Easter Egg triggered by 'reboot'
 function reboot {
     Clear-Host
     Write-Host "ACCESS GRANTED: Initiating Hacker Protocol..." -ForegroundColor Green
@@ -77,16 +96,16 @@ function reboot {
     # Fake reboot-like countdown
     5..1 | ForEach-Object {
         Write-Host "$_..." -ForegroundColor Cyan
-        Start-Sleep -Seconds 1
+        Start-Sleep -Seconds 0.5
     }
 
-    # Initiate secret console text
+    # Reboot-like system message
     Write-Host "Reboot sequence complete." -ForegroundColor Green
     Start-Sleep -Milliseconds 500
     Write-Host "Hacker Mode Active. System running at optimal performance..." -ForegroundColor Yellow
     Start-Sleep -Milliseconds 500
 
-    # Final hacker message
+    # Random hacker message
     $hackerMessages = @(
         "Welcome back, operator.",
         "System compromised. Protocols engaged.",
@@ -95,8 +114,7 @@ function reboot {
         "Exploiting the system for fun and profit..."
     )
 
-    # Random hacker message from list
     Write-Host ($hackerMessages | Get-Random) -ForegroundColor Magenta
-    Start-Sleep -Seconds 2
+    Start-Sleep -Seconds 2.5
     Clear-Host
 }
