@@ -34,8 +34,6 @@ if (-not $global:SplashShown) {
         "Welcome back, legend.",
         "Hey, JayJay.",
         "Can you talk?"
-        "Dreams demand hustle.",
-        "Welcome back, legend."
     )
 
     # Pick random message and apply typing effect
@@ -66,8 +64,15 @@ Set-Alias clr Clear-Host
 function cdc { Set-Location "C:\" }
 function cdg { Set-Location "D:\github" }
 
-# Default starting directory
-Set-Location "D:\github\"
+$envFile = "D:\github\.env"
+if (Test-Path $envFile) {
+    Get-Content $envFile | ForEach-Object {
+        if ($_ -match "^([^=]+)=(.*)$") {
+            [System.Environment]::SetEnvironmentVariable($matches[1], $matches[2], [System.EnvironmentVariableTarget]::User)
+        }
+    }
+}
+
 
 # =============== Function Section ===============
 
@@ -81,9 +86,8 @@ function viewnote {
     python "D:\github\notes\aNoteViewer.py"
 }
 
-# Open the repo page in browser
-function go-repo {
-    $repoUrl = "https://github.com/CodeSeedJJ?tab=repositories"
+function open-repo {
+    $repoUrl = $env:REPO_URL
     Start-Process $repoUrl
 }
 
