@@ -30,7 +30,6 @@ if (-not $global:SplashShown) {
         "Begin transmission.",
         "Ready to code.",
         "Dreams demand hustle.",
-        "Every line matters.",
         "Welcome back, legend."
     )
 
