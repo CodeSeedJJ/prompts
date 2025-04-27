@@ -31,14 +31,11 @@ if (-not $global:SplashShown) {
         "The Matrix has you.",
         "Begin transmission.",
         "Ready to code.",
-<<<<<<< HEAD
         "Welcome back, legend.",
         "Hey, JayJay.",
         "Can you talk?"
-=======
         "Dreams demand hustle.",
         "Welcome back, legend."
->>>>>>> 12881f0df3e42b40967575f58acefa7001e86cc1
     )
 
     # Pick random message and apply typing effect
