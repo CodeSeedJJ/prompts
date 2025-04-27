@@ -86,7 +86,7 @@ function viewnote {
     python "D:\github\notes\aNoteViewer.py"
 }
 
-function open-repo {
+function go-repo {
     $repoUrl = $env:REPO_URL
     Start-Process $repoUrl
 }
